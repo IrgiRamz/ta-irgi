@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\PertanyaanController;
+use App\Http\Controllers\SetchatbotController;
 use App\Http\Controllers\MetodebayarController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProdukjasaController;
@@ -55,8 +55,8 @@ Route::post('/kelolausers/store', [UserController::class, 'store'])->name('kelol
 // End Users
 
 // Chatbot
-Route::resource('set-chatbot', PertanyaanController::class);
-
+Route::resource('setchatbot', SetchatbotController::class);
+Route::get('/setchatbot', [SetchatbotController::class, 'index'])->name('setchatbot.index');
 // End Chatbot
 
 

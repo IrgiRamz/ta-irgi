@@ -26,7 +26,6 @@
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
                         <input type="text" class="form-control" id="name" name="name" required>
-                        <input type="hidden" name="status" value="aktif">
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
@@ -48,6 +47,7 @@
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" required autocomplete="new-password">
                     </div>
+                    <input type="hidden" name="status" value="aktif">
                     <!-- Button Aksi -->
                     <button type="submit" class="btn btn-primary">Tambah</button>
                     <a href="{{ route('kelolausers.index') }}" class="btn btn-danger">Kembali</a>

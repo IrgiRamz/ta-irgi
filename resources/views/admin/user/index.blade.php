@@ -40,7 +40,7 @@
                             @if($datax->status == 'aktif')
                             <td><span style="color: green;">Aktif</span></td>
                             @else
-                            <td><span style="color: red;">Tidak Aktif</span></td>
+                            <td><span style="color: red;">Nonaktif</span></td>
                             @endif
                             <td class="text-center">
                                 <form method="POST" action="{{ route('kelolausers.destroy', $datax->id) }}" class="delete-form">

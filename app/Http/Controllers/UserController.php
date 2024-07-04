@@ -74,7 +74,7 @@ class UserController extends Controller
             'status' => $request['status'],
             'password' => Hash::make($request['password']),
         ]);
-        return redirect()->route('kelolausers.index')->with('success', 'Akun User berhasil ditambah.');
+        return redirect()->route('kelolausers.index')->with('success', 'Akun User Berhasil Ditambah.');
     }
 
     /**
@@ -149,13 +149,9 @@ class UserController extends Controller
             $user->password = Hash::make($request->password);
         }
 
-        if ($request->status) {
-            $user->status = $request->status;
-        }
-
         $user->save();
 
-        return redirect()->route('kelolausers.index')->with('success', 'Akun User berhasil diedit.');
+        return redirect()->route('kelolausers.index')->with('success', 'Akun User Berhasil Diedit.');
     }
 
     /**
@@ -170,9 +166,9 @@ class UserController extends Controller
 
         try {
             User::where('id', $id)->delete();
-            return redirect()->route('kelolausers.index')->with('success', 'Akun berhasil dihapus.');
+            return redirect()->route('kelolausers.index')->with('success', 'Akun Berhasil Dihapus.');
         } catch (\Exception $e) {
-            return redirect()->route('kelolausers.index')->with('error', 'Gagal menghapus akun.');
+            return redirect()->route('kelolausers.index')->with('error', 'Gagal Menghapus Akun.');
         }
     }
 }
