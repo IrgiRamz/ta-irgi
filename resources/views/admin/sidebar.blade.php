@@ -13,7 +13,7 @@
                 </a>
                 <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="{{ url('/akunuser')}}"><small><i class="fa fa-user"></i>&nbsp;Management User</small></a>
+                        <a class="nav-link" href="{{ url('/kelolausers')}}"><small><i class="fa fa-user"></i>&nbsp;Management User</small></a>
                         <a class="nav-link" href="{{ url('/chatbot')}}"><small><i class="fa fa-commenting"></i>&nbsp;Management Chatbot</small></a>
                         <a class="nav-link" href="{{ url('/produk')}}"><small><i class="fa fa-cubes"></i>&nbsp;Management Produk</small></a>
                         <a class="nav-link" href="{{ url('/bayar')}}"><small><i class="fa fa-usd"></i>&nbsp;Management Metode Pembayaran</small></a>

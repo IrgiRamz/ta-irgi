@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PertanyaanController;
+use App\Http\Controllers\MetodebayarController;
+use App\Http\Controllers\PesananController;
+use App\Http\Controllers\ProdukjasaController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +50,21 @@ Route::get('/pemesanan', function () {
 Route::get('/history', function () {
     return view('admin.history.index');
 });
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Users
+Route::resource('kelolausers', UserController::class);
+Route::post('/kelolausers', [UserController::class, 'index']);
+Route::post('/kelolausers/create', [UserController::class, 'store'])->name('kelolausers.store');
+//Route::delete('/hapus-user/{id}', [UserController::class, 'destroy']);
+
+
+
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+})->middleware('auth');
+
