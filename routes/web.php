@@ -60,6 +60,17 @@ Route::get('/setchatbot', [SetchatbotController::class, 'index'])->name('setchat
 // End Chatbot
 
 
+// Metodebayar
+Route::resource('metodebayar', MetodebayarController::class);
+Route::get('/metodebayar', [MetodebayarController::class, 'index'])->name('metodebayar.index');
+// End Metodebayar
+
+// Produkjasa
+Route::resource('produkjasa', ProdukjasaController::class);
+Route::get('/produkjasa', [ProdukjasaController::class, 'index'])->name('produkjasa.index');
+// End Produkjasa
+
+
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware('auth');

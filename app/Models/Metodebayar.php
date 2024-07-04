@@ -17,6 +17,7 @@ class Metodebayar extends Model
         'kode',
         'pembayaran',
         'norek',
+        'tipe',
         'status'
     ];
 
