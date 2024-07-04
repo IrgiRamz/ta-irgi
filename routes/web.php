@@ -27,14 +27,6 @@ Route::get('/index', function () {
     return view('admin.dashboard.index');
 });
 
-Route::get('/akunuser', function () {
-    return view('admin.user.index');
-});
-
-Route::get('/chatbot', function () {
-    return view('admin.chatbot.index');
-});
-
 Route::get('/produk', function () {
     return view('admin.produk.index');
 });
@@ -58,10 +50,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Users
 Route::resource('kelolausers', UserController::class);
-Route::post('/kelolausers', [UserController::class, 'index']);
-Route::post('/kelolausers/create', [UserController::class, 'store'])->name('kelolausers.store');
-//Route::delete('/hapus-user/{id}', [UserController::class, 'destroy']);
+Route::get('/kelolausers', [UserController::class, 'index'])->name('kelolausers.index');
+Route::post('/kelolausers/store', [UserController::class, 'store'])->name('kelolausers.store');
+// End Users
 
+// Chatbot
+Route::resource('set-chatbot', PertanyaanController::class);
+
+// End Chatbot
 
 
 Route::get('/dashboard', function () {

@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use App\Models\Pertanyaan;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class PertanyaanController extends Controller
 {
@@ -11,7 +16,8 @@ class PertanyaanController extends Controller
      */
     public function index()
     {
-        //
+        $ar_tanya = Pertanyaan::all()->where('status', '=', 'aktif');
+        return view('admin.pertanyaan.index', compact('ar_tanya'));
     }
 
     /**

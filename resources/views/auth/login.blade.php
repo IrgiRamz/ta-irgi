@@ -70,4 +70,14 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+@if(Session::has('error'))
+<script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Login Gagal',
+            text: 'Email dan Password Salah atau Akun Dinonaktifkan',
+        });
+</script>
+@endif
 @endsection

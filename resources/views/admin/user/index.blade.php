@@ -22,6 +22,7 @@
                             <th>No</th>
                             <th>Kode</th>
                             <th>Nama</th>
+                            <th>Email</th>
                             <th>Role</th>
                             <th>Status</th>
                             <th>Aksi</th>
@@ -34,6 +35,7 @@
                             <td>{{ $no }}</td>
                             <td>{{ $datax->kodeuser }}</td>
                             <td>{{ $datax->name }}</td>
+                            <td>{{ $datax->email }}</td>
                             <td>{{ $datax->role }}</td>
                             @if($datax->status == 'aktif')
                             <td><span style="color: green;">Aktif</span></td>

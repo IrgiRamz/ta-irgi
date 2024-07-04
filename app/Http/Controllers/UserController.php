@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         //$ar_users = DB::table('users')->where('status', '=', 'aktif'); 
-        $ar_users = User::all()->where('status', '=', 'aktif');
+        $ar_users = User::all();
         return view('admin.user.index', compact('ar_users'));
     }
 
@@ -147,6 +147,10 @@ class UserController extends Controller
 
         if ($request->password) {
             $user->password = Hash::make($request->password);
+        }
+
+        if ($request->status) {
+            $user->status = $request->status;
         }
 
         $user->save();

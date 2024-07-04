@@ -46,6 +46,13 @@
                         </select>
                     </div>
                     <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select name="status" id="status" class="form-select">
+                            <option value="aktif" {{ $row->status == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                            <option value="nonaktif" {{ $row->status == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="password" class="form-label">Ubah Password (<i>Optional</i>)</label>
                         <input type="password" class="form-control" id="password" name="password" autocomplete="new-password">
                     </div>
