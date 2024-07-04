@@ -21,10 +21,8 @@
 
         <div class="card mb-4">
             <div class="card-body">
-                <!-- Form untuk input data user baru -->
-                <form method="POST" action="{{ route('kelolausers.store') }}">
+                <form method="POST" action="{{ route('kelolausers.store') }}" enctype="multipart/form-data">
                     @csrf
-                    <!-- Input fields untuk data user sesuai dengan model User -->
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
                         <input type="text" class="form-control" id="name" name="name" required>
@@ -39,7 +37,7 @@
                         <input type="number" class="form-control" id="telepon" name="telepon">
                     </div>
                     <div class="mb-3">
-                        <label for="role" class="form-label">role</label>
+                        <label for="role" class="form-label">Role</label>
                         <select name="role" id="role" class="form-select">
                             <option value="admin">Admin</option>
                             <option value="finance">Finance</option>
@@ -50,12 +48,9 @@
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" required autocomplete="new-password">
                     </div>
-                    <div class="mb-3">
-                        <label for="password-confirm" class="form-label">Konfirmasi Password</label>
-                        <input type="password" id="password-confirm" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                    </div>
-                    <!-- Tambahkan input fields lainnya sesuai kebutuhan -->
+                    <!-- Button Aksi -->
                     <button type="submit" class="btn btn-primary">Tambah</button>
+                    <a href="{{ route('kelolausers.index') }}" class="btn btn-danger">Kembali</a>
                 </form>
             </div>
         </div>

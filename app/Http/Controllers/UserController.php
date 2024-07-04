@@ -62,7 +62,7 @@ class UserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8'],
         ]);
 
         User::create([
@@ -90,6 +90,9 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
+        //
+        $row = User::find($id);
+        return view('admin.user.edit', compact('row'));
     }
 
     /**
@@ -97,7 +100,58 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //update data user
+        $user = User::find($id);
+
+        if ($request->role != $request->rolelast) {
+            // Tentukan kode awal berdasarkan role
+            if ($request->role == "admin") {
+                $rolenya = "ADM-";
+            } elseif ($request->role == "finance") {
+                $rolenya = "FNC-";
+            } else {
+                $rolenya = "SPP-";
+            }
+
+            // Ambil tanggal hari ini dalam format YYMMDD
+            $date = date('ymd');
+
+            // Dapatkan kode user terakhir berdasarkan role dan tanggal
+            $lastUser = User::where('kodeuser', 'like', $rolenya . $date . '%')->orderBy('kodeuser', 'desc')->first();
+
+            // Tentukan nomor urut berikutnya
+            if ($lastUser) {
+                $lastNumber = (int)substr($lastUser->kodeuser, -3);
+                $newNumber = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+            } else {
+                $newNumber = '001';
+            }
+
+            // Gabungkan role, tanggal, dan nomor urut untuk kode user baru
+            $kodeuser = $rolenya . $date . $newNumber;
+        } else {
+            $kodeuser = $request->kodeuser;
+        }
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+        ]);
+
+        $user->kodeuser = $kodeuser;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->telepon = $request->telepon;
+        $user->role = $request->role;
+        $user->status = $request->status;
+
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
+        return redirect()->route('kelolausers.index')->with('success', 'Akun User berhasil diedit.');
     }
 
     /**
