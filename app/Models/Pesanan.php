@@ -20,6 +20,7 @@ class Pesanan extends Model
         'nohp',
         'namaklinik',
         'lamapakai',
+        'total',
         'alamat',
         'domain',
         'waktupesan',

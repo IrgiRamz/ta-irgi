@@ -137,6 +137,7 @@ class ProdukjasaController extends Controller
         $produk->kodeproduk = $kode;
         $produk->namaproduk = $request->namaproduk;
         $produk->harga = $request->harga;
+        $produk->kategori = $request->kategori;
         $produk->status = $request->status;
 
         $produk->save();

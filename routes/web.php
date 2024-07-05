@@ -68,6 +68,7 @@ Route::get('/metodebayar', [MetodebayarController::class, 'index'])->name('metod
 // Produkjasa
 Route::resource('produkjasa', ProdukjasaController::class);
 Route::get('/produkjasa', [ProdukjasaController::class, 'index'])->name('produkjasa.index');
+Route::get('/history', [ProdukjasaController::class, 'index2'])->name('produkjasa.index2');
 // End Produkjasa
 
 // Pesanan

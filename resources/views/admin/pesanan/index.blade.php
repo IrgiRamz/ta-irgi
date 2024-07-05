@@ -46,16 +46,18 @@
                                 @endphp
                                 Rp.{{ number_format($totalHarga, 0, ',', '.') }}
                             </td>
-                            @if($datax->status == 'sudah')
-                            <td><span style="color: green;">Aktif</span></td>
+                            @if($datax->status == 'belum')
+                            <td><span style="color: red;">Belum Bayar</span></td>
+                            @elseif ($datax->status == 'sudah')
+                            <td><span style="color: orange;">Verifikasi</span></td>
                             @else
-                            <td><span style="color: red;">Nonaktif</span></td>
+                            <td><span style="color: green;">Sudah Bayar (Terverifikasi)</span></td>
                             @endif
                             <td class="text-center">
                                 <form method="POST" action="{{ route('pesanan.destroy', $datax->idpesanan) }}" class="delete-form">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="{{ route('pesanan.edit', $datax->idpesanan) }}" class="btn btn-info btn-sm me-1" title="Proses"><span class="fa fa-external-link-square"></span></a>
+                                    <a href="{{ route('pesanan.show', $datax->idpesanan) }}" class="btn btn-info btn-sm me-1" title="Proses"><span class="fa fa-external-link-square"></span></a>
                                     <button type="submit" class="btn btn-danger btn-sm delete-confirm" title="Hapus"><span class="fa fa-trash"></span></button>
                                 </form>
                             </td>

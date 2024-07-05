@@ -116,6 +116,21 @@
                 });
             });
         });
+
+        $(document).ready(function() {
+            hitungtotal()
+            function hitungtotal() {
+                var harga = $('#produk option:selected').data('harga');
+                var lamapakai = $('#lamapakai').val();
+                var total = harga * lamapakai;
+                if (lamapakai == 12) {
+                    total = harga * 10;
+                }
+                $('#total').val('Rp. ' + total.toLocaleString('id-ID'));
+            }
+
+            $('#produk, #lamapakai').on('change', hitungtotal);
+        });
     </script>
 
 </body>
