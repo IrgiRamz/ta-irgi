@@ -70,6 +70,11 @@ Route::resource('produkjasa', ProdukjasaController::class);
 Route::get('/produkjasa', [ProdukjasaController::class, 'index'])->name('produkjasa.index');
 // End Produkjasa
 
+// Pesanan
+Route::resource('pesanan', PesananController::class);
+Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan.index');
+// End Pesanan
+
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');

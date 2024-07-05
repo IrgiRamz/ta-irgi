@@ -19,7 +19,7 @@
                         <a class="nav-link" href="{{ url('/metodebayar')}}"><small><i class="fa fa-usd"></i>&nbsp;Management Metode Pembayaran</small></a>
                     </nav>
                 </div>
-                <a class="nav-link" href="{{ url('/pemesanan')}}">
+                <a class="nav-link" href="{{ url('/pesanan')}}">
                     <div class="sb-nav-link-icon"><i class="fa fa-shopping-cart"></i></div>
                     Pemesanan
                 </a>

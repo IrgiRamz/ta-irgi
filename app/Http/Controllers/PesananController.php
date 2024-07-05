@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Pesanan;
+use App\Models\User;
+use App\Models\Metodebayar;
+use App\Models\Produkjasa;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class PesananController extends Controller
 {
@@ -11,7 +18,8 @@ class PesananController extends Controller
      */
     public function index()
     {
-        //
+        $ar_pesanan = Pesanan::with(['user', 'produk', 'metodeBayar'])->get();
+        return view('admin.pesanan.index', compact('ar_pesanan'));
     }
 
     /**
@@ -19,7 +27,8 @@ class PesananController extends Controller
      */
     public function create()
     {
-        //
+        $ar_pesanan = Produkjasa::all();
+        return view('admin.pesanan.create', compact('ar_pesanan'));
     }
 
     /**
@@ -27,7 +36,7 @@ class PesananController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -59,6 +68,15 @@ class PesananController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pesanan = Pesanan::find($id);
+        if (!$pesanan) {
+            return redirect()->route('pesanan.index')->with('error', 'Data tidak ditemukan.');
+        }
+        try {
+            Pesanan::where('idpesanan', $id)->delete();
+            return redirect()->route('pesanan.index')->with('success', 'Data Pesanan Berhasil Dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->route('pesanan.index')->with('error', 'Gagal Menghapus Data.');
+        }
     }
 }
