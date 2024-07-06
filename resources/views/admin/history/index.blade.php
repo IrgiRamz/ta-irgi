@@ -8,8 +8,8 @@
             <li class="breadcrumb-item active">History Pemesanan</li>
         </ol>
         <div class="mb-1">
-            <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i></button>
-            <button type="button" class="btn btn-success btn-sm"><i class="fa fa-file-excel"></i></button>
+            <!--button type="button" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i></!--button-->
+            <!--button type="button" class="btn btn-success btn-sm"><i class="fa fa-file-excel"></i></!--button-->
         </div>
         <div class="card mb-4">
             <div class="card-header">
@@ -26,22 +26,39 @@
                             <th>Waktu Pesan</th>
                             <th>Produk</th>
                             <th>Total</th>
+                            <th>Diverifikasi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
+                    @php $no = 1; @endphp
+                    @foreach($ar_pesanan as $datax)
                         <tr>
-                            <td>1</td>
-                            <td>INV240622001</td>
-                            <td>Andi</td>
-                            <td>2024-06-28</td>
-                            <td>Software Klinik Kecantikan (Premium) [1 Bulan]</td>
-                            <td>Rp. 575.000</td>
+                            <td>{{ $no }}</td>
+                            <td>{{ $datax->invoice }}</td>
+                            <td>{{ $datax->namapemesan }}</td>
+                            <td>{{ $datax->waktupesan }}</td>
+                            <td>{{ $datax->produk->namaproduk }} ({{ $datax->lamapakai }} Bulan)</td>
+                            <td>
+                                @php
+                                    $harga = $datax->produk->harga;
+                                    $lamapakai = $datax->lamapakai;
+                                    $totalHarga = ($lamapakai == 12) ? $harga * 10 : $harga * $lamapakai;
+                                @endphp
+                                Rp.{{ number_format($totalHarga, 0, ',', '.') }}
+                            </td>
+                            <td>{{ $datax->user->name }}</td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-primary btn-sm me-1"><span class="fa fa-eye"></span></button>
-                                <button type="button" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></button>
+                                <form method="POST" action="{{ route('pesanan.destroy', $datax->idpesanan) }}" class="delete-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a href="{{ route('pesanan.show', $datax->idpesanan) }}" class="btn btn-info btn-sm me-1" title="Detail"><span class="fa fa-eye"></span></a>
+                                    <button type="submit" class="btn btn-danger btn-sm delete-confirm" title="Hapus"><span class="fa fa-trash"></span></button>
+                                </form>
                             </td>
                         </tr>
+                        @php $no++ @endphp
+                        @endforeach
                     </tbody>
                 </table>
             </div>

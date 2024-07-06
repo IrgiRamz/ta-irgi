@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SetchatbotController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\MetodebayarController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProdukjasaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PesananuserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +22,35 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landingpage.home.index');
+});
+
+Route::get('/fklinik', function () {
+    return view('landingpage.fitur.fklinik');
+});
+
+Route::get('/fcantik', function () {
+    return view('landingpage.fitur.fcantik');
+});
+
+Route::get('/fgigi', function () {
+    return view('landingpage.fitur.fgigi');
+});
+
+Route::get('/kontak', function () {
+    return view('landingpage.kontak.index');
+});
+
+Route::get('/hcantik', function () {
+    return view('landingpage.harga.hcantik');
+});
+
+Route::get('/hklinik', function () {
+    return view('landingpage.harga.hklinik');
+});
+
+Route::get('/hgigi', function () {
+    return view('landingpage.harga.hgigi');
 });
 
 Route::get('/index', function () {
@@ -39,14 +69,13 @@ Route::get('/pemesanan', function () {
     return view('admin.pemesanan.index');
 });
 
-Route::get('/history', function () {
-    return view('admin.history.index');
-});
 
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('home', HomeController::class);
+
 
 // Users
 Route::resource('kelolausers', UserController::class);
@@ -68,14 +97,18 @@ Route::get('/metodebayar', [MetodebayarController::class, 'index'])->name('metod
 // Produkjasa
 Route::resource('produkjasa', ProdukjasaController::class);
 Route::get('/produkjasa', [ProdukjasaController::class, 'index'])->name('produkjasa.index');
-Route::get('/history', [ProdukjasaController::class, 'index2'])->name('produkjasa.index2');
 // End Produkjasa
 
 // Pesanan
 Route::resource('pesanan', PesananController::class);
 Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan.index');
+Route::get('/history', [PesananController::class, 'index2'])->name('pesanan.index2');
 // End Pesanan
 
+// Pesanan User
+Route::resource('order', PesananuserController::class);
+Route::get('/order', [PesananuserController::class, 'create'])->name('pesanan.create');
+// End Pesanan User
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');

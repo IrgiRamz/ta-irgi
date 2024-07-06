@@ -131,6 +131,15 @@
 
             $('#produk, #lamapakai').on('change', hitungtotal);
         });
+
+        $(document).ready(function() {
+        $('#btn-keluar').click(function() {
+            history.back();
+            setTimeout(function() {
+                location.reload();
+            }, 100);
+        });
+    });
     </script>
 
 </body>

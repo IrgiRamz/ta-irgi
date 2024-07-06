@@ -11,21 +11,13 @@ use App\Models\Produkjasa;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class PesananController extends Controller
+class PesananuserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $ar_pesanan = Pesanan::with(['user', 'produk', 'metodeBayar'])->where('status' , '!=', 'verif')->get();
-        return view('admin.pesanan.index', compact('ar_pesanan'));
-    }
-
-    public function index2()
-    {
-        $ar_pesanan = Pesanan::with(['user', 'produk', 'metodeBayar'])->where('status' , '=', 'verif')->get();
-        return view('admin.history.index', compact('ar_pesanan'));
     }
 
     /**
@@ -35,7 +27,7 @@ class PesananController extends Controller
     {
         $ar_produk = Produkjasa::all();
         $ar_bayar = Metodebayar::all();
-        return view('admin.pesanan.create', compact('ar_produk', 'ar_bayar'));
+        return view('landingpage.pesanan.create', compact('ar_produk', 'ar_bayar'));
     }
 
     /**
@@ -96,7 +88,7 @@ class PesananController extends Controller
             'idproduk' => $request['produk'],
             'idbayar' => $request['metodebayar'],
         ]);
-        return redirect()->route('pesanan.index')->with('success', 'Data Pemesanan Berhasil Ditambah.');
+        return redirect()->route('home.index')->with('success', 'Berhasil Order.');
     }
 
     /**
@@ -104,8 +96,7 @@ class PesananController extends Controller
      */
     public function show(string $id)
     {
-        $row = Pesanan::find($id);
-        return view('admin.pesanan.show', compact('row'));
+        //
     }
 
     /**
@@ -121,11 +112,7 @@ class PesananController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $pesanan = Pesanan::find($id);
-        $pesanan->status = $request->status;
-        $pesanan->iduser = $request->iduser;
-        $pesanan->save();
-        return redirect()->route('pesanan.index')->with('success', 'Pesanan Berhasil Diverifikasi.');
+        //
     }
 
     /**
@@ -133,15 +120,6 @@ class PesananController extends Controller
      */
     public function destroy(string $id)
     {
-        $pesanan = Pesanan::find($id);
-        if (!$pesanan) {
-            return redirect()->route('pesanan.index')->with('error', 'Data tidak ditemukan.');
-        }
-        try {
-            Pesanan::where('idpesanan', $id)->delete();
-            return redirect()->route('pesanan.index')->with('success', 'Data Pesanan Berhasil Dihapus.');
-        } catch (\Exception $e) {
-            return redirect()->route('pesanan.index')->with('error', 'Gagal Menghapus Data.');
-        }
+        //
     }
 }

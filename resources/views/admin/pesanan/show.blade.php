@@ -61,7 +61,7 @@
                     <h5>Domain</h5>
                     <p>{{ $row->domain }}</p>
                 </div>
-                @if($row->status == 'sudah')
+                @if($row->status != 'belum')
                 <hr>
                 <h5 style="color: green;">Sudah Bayar</h5>
                 <div class="mb-3">
@@ -70,7 +70,14 @@
                 </div>
                 <div class="mb-3">
                     <h5>Catatan</h5>
-                    <p>{{ $row->catatan }} catatan</p> <br>
+                    <p>{{ $row->catatan }} catatan</p>
+                </div>
+                @endif
+                @if($row->status == 'verif')
+                <hr>
+                <div class="mb-3">
+                    <h5>Diverifikasi oleh:</h5>
+                    <p>{{ $row->user->name }}</p>
                 </div>
                 @endif
                 
@@ -78,8 +85,12 @@
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="status" value="verif">
+                    <input type="hidden" name="iduser" value="{{ Auth::user()->id }}">
+                    @if($row->status != 'verif')
                     <button type="submit" class="btn btn-success">Verifikasi</button>
-                        <a href="{{ route('pesanan.index') }}" class="btn btn-danger">Kembali</a>
+                    @endif
+                    {{--<a href="{{ route('pesanan.index') }}" class="btn btn-danger">Kembali</a> --}}
+                    <button type="button" class="btn btn-danger" id="btn-keluar">Kembali</button>
                 </form>
             </div>
         </div>
