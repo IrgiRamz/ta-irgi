@@ -10,13 +10,13 @@
         </ol>
 
         @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
         @endif
 
         <div class="card mb-4">
@@ -66,11 +66,15 @@
                 <h5 style="color: green;">Sudah Bayar</h5>
                 <div class="mb-3">
                     <h5>Bukti</h5>
-                    <p>Image</p>
+                    @if ($row->bukti)
+                    <img src="{{ asset($row->bukti) }}" alt="Bukti Pembayaran" class="w-25 img-thumbnail">
+                    @else
+                    <p>Tidak ada bukti pembayaran.</p>
+                    @endif
                 </div>
                 <div class="mb-3">
                     <h5>Catatan</h5>
-                    <p>{{ $row->catatan }} catatan</p>
+                    <p>{{ $row->catatan }}</p>
                 </div>
                 @endif
                 @if($row->status == 'verif')
@@ -80,7 +84,7 @@
                     <p>{{ $row->user->name }}</p>
                 </div>
                 @endif
-                
+
                 <form method="POST" action="{{ route('pesanan.update', $row->idpesanan) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')

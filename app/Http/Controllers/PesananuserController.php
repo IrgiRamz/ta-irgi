@@ -56,7 +56,7 @@ class PesananuserController extends Controller
 
         // harga total
         $hrgpro = Produkjasa::find($request->produk);
-        if($request->lamapakai == 12) {
+        if ($request->lamapakai == 12) {
             $total = $hrgpro->harga * 10;
         } else {
             $total = $request->lamapakai * $hrgpro->harga;
@@ -73,7 +73,7 @@ class PesananuserController extends Controller
             'alamat' => ['required', 'string', 'max:255'],
         ]);
 
-        Pesanan::create([
+        $pesanan = Pesanan::create([
             'invoice' => $kode,
             'namapemesan' => $request['namapemesan'],
             'emailpemesan' => $request['emailpemesan'],
@@ -88,7 +88,45 @@ class PesananuserController extends Controller
             'idproduk' => $request['produk'],
             'idbayar' => $request['metodebayar'],
         ]);
-        return redirect()->route('home.index')->with('success', 'Berhasil Order.');
+        //return redirect()->route('home.index')->with('success', 'Berhasil Order.');
+        return redirect()->route('pesanan.konfirmasi', $pesanan->idpesanan)->with('success', 'Pesanan berhasil. Silakan konfirmasi pembayaran.');
+    }
+
+    public function confirmPayment($id)
+    {
+        $pesanan = Pesanan::findOrFail($id);
+        return view('landingpage.pesanan.confirm', compact('pesanan'));
+    }
+
+    /**
+     * Update the specified resource in storage with payment confirmation.
+     */
+    public function updatePayment(Request $request, $id)
+    {
+        $request->validate([
+            'bukti_pembayaran' => ['required', 'image', 'mimes:jpeg,png,jpg,svg', 'max:2048'],
+        ]);
+
+        $pesanan = Pesanan::findOrFail($id);
+
+        // Mengunggah file bukti pembayaran
+        if ($request->hasFile('bukti_pembayaran')) {
+            $file = $request->file('bukti_pembayaran');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $filePath = public_path('assets/bukti');
+            $file->move($filePath, $filename);
+            $pesanan->bukti = 'assets/bukti/' . $filename;
+        }
+
+        // Simpan catatan
+        $pesanan->catatan = $request->catatan;
+
+        // Update status pemesanan
+        $pesanan->status = 'sudah';
+        $pesanan->save();
+
+        return redirect()->route('pesanan.konfirmasi', $pesanan->idpesanan)->with('success', 'Pesanan berhasil. Silakan konfirmasi pembayaran.');
+        return redirect()->route('pesanan.konfirmasi', $pesanan->idpesanan)->with('success', 'Konfirmasi pembayaran berhasil, Tunggu Konfirmasi Via Whatsapp');
     }
 
     /**

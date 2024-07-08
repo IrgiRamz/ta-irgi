@@ -9,6 +9,7 @@ use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProdukjasaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PesananuserController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,10 +108,21 @@ Route::get('/history', [PesananController::class, 'index2'])->name('pesanan.inde
 
 // Pesanan User
 Route::resource('order', PesananuserController::class);
-Route::get('/order', [PesananuserController::class, 'create'])->name('pesanan.create');
+Route::get('/order', [PesananuserController::class, 'create'])->name('order.create');
 // End Pesanan User
 
-Route::get('/dashboard', function () {
+/*Route::get('/dashboard', function () {
     return view('admin.dashboard');
-})->middleware('auth');
+})->middleware('auth');*/
+
+Route::resource('dashboard', DashboardController::class);
+Route::get('/dashboard', [DashboardController::class, 'index']);
+
+Route::get('/pesanans/{id}/konfirmasi', [PesananuserController::class, 'confirmPayment'])->name('pesanan.konfirmasi');
+Route::post('/pesanans/{id}/konfirmasi', [PesananuserController::class, 'updatePayment']);
+
+
+
+
+
 
