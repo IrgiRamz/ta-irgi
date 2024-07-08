@@ -10,6 +10,7 @@ use App\Http\Controllers\ProdukjasaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PesananuserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ChatbotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,6 +121,12 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::get('/pesanans/{id}/konfirmasi', [PesananuserController::class, 'confirmPayment'])->name('pesanan.konfirmasi');
 Route::post('/pesanans/{id}/konfirmasi', [PesananuserController::class, 'updatePayment']);
+
+
+Route::post('/chatbot/response', [ChatbotController::class, 'getResponse'])->name('chatbot.response');
+
+
+
 
 
 

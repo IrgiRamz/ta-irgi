@@ -5,6 +5,8 @@
     <meta charset="utf-8" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>
         ICONIX :: Software Klinik kecantikan dan Klinik Kesehatan Terbaik
     </title>
@@ -232,12 +234,22 @@
                 if (message.trim() !== '') {
                     $('#chatbot-body').append('<div class="user-message"><p>' + message + '</p></div>');
                     $('#chatbot-input').val('');
-                    // Here you can add code to send the message to your server and get a response
-                    // Simulate bot response
-                    setTimeout(function() {
-                        $('#chatbot-body').append('<div class="bot-message"><p>Bot response to "' + message + '"</p></div>');
-                        $('#chatbot-body').scrollTop($('#chatbot-body')[0].scrollHeight);
-                    }, 1000);
+                    $.ajax({
+                        url: "{{ route('chatbot.response') }}",
+                        type: 'POST',
+                        data: {
+                            question: message,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            $('#chatbot-body').append('<div class="bot-message"><p>' + response.answer + '</p></div>');
+                            $('#chatbot-body').scrollTop($('#chatbot-body')[0].scrollHeight);
+                        },
+                        error: function(xhr) {
+                            $('#chatbot-body').append('<div class="bot-message"><p>Sorry, something went wrong.</p></div>');
+                            $('#chatbot-body').scrollTop($('#chatbot-body')[0].scrollHeight);
+                        }
+                    });
                 }
             });
 
