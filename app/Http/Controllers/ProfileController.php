@@ -4,28 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Pesanan;
 use App\Models\User;
-use App\Models\Metodebayar;
-use App\Models\Produkjasa;
-use App\Models\Pertanyaan;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
-class DashboardController extends Controller
+
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {   
-         $totalOrders = Pesanan::count();
-         $totalProducts = ProdukJasa::count();
-         $totalRevenue = Pesanan::sum('total');
-         $totalUsers = User::count();
-         $totalPertanyaan = Pertanyaan::count();
-         return view('admin.dashboard', compact('totalOrders', 'totalProducts', 'totalRevenue', 'totalUsers', 'totalPertanyaan'));
-    
+    public function index($id)
+    {
+       //
     }
 
     /**
@@ -57,7 +47,8 @@ class DashboardController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $row = User::find($id);
+        return view('admin.profile.index', compact('row'));
     }
 
     /**
@@ -65,7 +56,29 @@ class DashboardController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validasi input
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+        ]);
+
+        // Cari user berdasarkan ID
+        $user = User::find($id);
+
+        // Update data user
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->telepon = $request->telepon;
+
+        // Jika password diisi, update password
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+
+        // Simpan perubahan
+        $user->save();
+
+        return redirect()->route('dashboard.index')->with('success', 'Profil berhasil diperbarui.');
     }
 
     /**

@@ -7,6 +7,7 @@
             <li class="breadcrumb-item active">Dashboard</li>
         </ol>
         <div class="row">
+            @if(Auth::user()->role == 'finance' || Auth::user()->role == 'admin')
             <div class="col-xl-3 col-md-6">
                 <div class="card bg-primary text-white mb-4">
                     <div class="card-body">
@@ -17,6 +18,23 @@
                             <div class="text-left">
                                 <h5 class="card-title">Total Order</h5>
                                 <p class="card-text">{{ $totalOrders }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+            @if(Auth::user()->role == 'admin')
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-success text-white mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="icon">
+                                <i class="fas fa-hand-holding-usd fa-2x"></i>
+                            </div>
+                            <div class="text-left">
+                                <h5 class="card-title">Total Pendapatan</h5>
+                                <p class="card-text">Rp. {{ number_format($totalRevenue, 0, ',', '.') }}</p>
                             </div>
                         </div>
                     </div>
@@ -38,21 +56,6 @@
                 </div>
             </div>
             <div class="col-xl-3 col-md-6">
-                <div class="card bg-success text-white mb-4">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="icon">
-                                <i class="fas fa-hand-holding-usd fa-2x"></i>
-                            </div>
-                            <div class="text-left">
-                                <h5 class="card-title">Total Pendapatan</h5>
-                                <p class="card-text">Rp. {{ number_format($totalRevenue, 0, ',', '.') }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
                 <div class="card bg-danger text-white mb-4">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
@@ -67,6 +70,24 @@
                     </div>
                 </div>
             </div>
+            @endif
+            @if(Auth::user()->role == 'support')
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="icon">
+                                <i class="fas fa-users fa-2x"></i>
+                            </div>
+                            <div class="text-left">
+                                <h5 class="card-title">Total Pertanyaan</h5>
+                                <p class="card-text">{{ $totalPertanyaan }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
         </div>
     </div>
 </main>

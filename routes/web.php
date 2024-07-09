@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PesananuserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ChatbotController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,8 +117,16 @@ Route::get('/order', [PesananuserController::class, 'create'])->name('order.crea
     return view('admin.dashboard');
 })->middleware('auth');*/
 
+// Dashboard
 Route::resource('dashboard', DashboardController::class);
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+// End Dashboard
+
+// Profile
+Route::resource('profile', ProfileController::class);
+Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('profile.index');
+Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
+// End Profile
 
 Route::get('/pesanans/{id}/konfirmasi', [PesananuserController::class, 'confirmPayment'])->name('pesanan.konfirmasi');
 Route::post('/pesanans/{id}/konfirmasi', [PesananuserController::class, 'updatePayment']);

@@ -167,7 +167,7 @@
         </div>
         <div class="chatbot-body text-danger" id="chatbot-body">
             <div class="bot-message">
-                <p>Hello! How can I help you today?</p>
+                <p>Hello! Apakah ada yang bisa aku bantu?</p>
             </div>
         </div>
         <div class="chatbot-footer">

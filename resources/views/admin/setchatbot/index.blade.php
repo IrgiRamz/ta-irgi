@@ -1,5 +1,6 @@
 @extends('admin.index')
 @section('content')
+@if(Auth::user()->role != 'finance')
 <main>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Management Chatbot</h1>
@@ -57,4 +58,7 @@
         </div>
     </div>
 </main>
+@else
+@include('admin.access_denied')
+@endif
 @endsection

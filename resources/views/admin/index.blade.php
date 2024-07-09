@@ -11,6 +11,8 @@
     <link href="{{ asset('css/admin/datatablestyle.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin/styles.css') }}" rel="stylesheet" />
     <script src="{{ asset('js/admin/fontawesome.js') }}"></script>
+    <link rel="shortcut icon" href="{{ asset('images/landingpage/favicon.ico') }}" />
+
     <style>
         /* Menentukan lebar kolom pertama dan terakhir */
         td:first-child {

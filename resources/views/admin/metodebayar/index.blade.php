@@ -1,5 +1,6 @@
 @extends('admin.index')
 @section('content')
+@if(Auth::user()->role == 'admin')
 <main>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Management Metode Pembayaran</h1>
@@ -63,4 +64,7 @@
         </div>
     </div>
 </main>
+@else
+@include('admin.access_denied')
+@endif
 @endsection
