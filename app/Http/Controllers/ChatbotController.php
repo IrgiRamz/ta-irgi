@@ -16,12 +16,13 @@ class ChatbotController extends Controller
     {
         $question = $request->input('question');
 
-        // Preprocessing the question
+        // Preprocessing pertanyaan
         $processedQuestion = $this->preprocessText($question);
 
-        // Find the most similar question in the database
+        // Mencari kesamaan di dalam database
         $response = DB::table('pertanyaan')
             ->select('jawaban')
+            ->where('status', '=', 'aktif')
             ->whereRaw('MATCH (pertanyaan) AGAINST (?)', [$processedQuestion])
             ->first();
 
