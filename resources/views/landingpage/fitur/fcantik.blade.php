@@ -11,7 +11,7 @@
                     di Indonesia.<br><br>
                     Bisa dijalankan di semua jenis komputer/tablet/smartphone (baik Windows, Linux, MacOS, Android ataupun iOS).</p>
 
-                <a href="https://tools.iconix.id/invoice/client" target="_blank" class="btn btn-light text-primary me-2 mb-3">Order Sekarang</a>
+                <a href="{{ route('order.create') }}" target="_blank" class="btn btn-light text-primary me-2 mb-3">Order Sekarang</a>
                 <a href="{{ url('/hcantik')}}" class="btn btn-outline-light text-hover-primary mb-3">Lihat Paket Harga</a>
             </div>
             <div class="col-lg-5 text-center">

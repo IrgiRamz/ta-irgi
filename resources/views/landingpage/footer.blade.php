@@ -86,7 +86,7 @@
                         </li>
                     </ul>
                     <p class="mb-4 mb-md-0">
-                        © 2008-2023 by CV. Piranti Indonesia. All Rights Reserved.
+                        © 2008-2024 by CV. Piranti Indonesia. All Rights Reserved.
                     </p>
                     <ul class="list-unstyled d-flex justify-content-center mb-0">
                         <li class="ms-3">

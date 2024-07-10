@@ -17,6 +17,7 @@ class Pertanyaan extends Model
 
     protected $fillable = [
         'pertanyaan',
+        'pertanyaan2',
         'jawaban',
         'status',
         'iduser'

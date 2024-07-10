@@ -64,7 +64,7 @@
                     
                 </div>
 
-                <a href="https://tools.iconix.id/invoice/client" target="_blank"
+                <a href="{{ route('order.create') }}" target="_blank"
                 class="btn w-100 text-center mt-4" style="background-color: green; color: white;">Pesan Sekarang</a>
 
             </div>
@@ -122,7 +122,7 @@
                     
                 </div>
 
-                <a href="https://tools.iconix.id/invoice/client" target="_blank"
+                <a href="{{ route('order.create') }}" target="_blank"
                 class="btn w-100 text-center mt-4" style="background-color: red; color: white;">Pesan Sekarang</a>
             </div>
         </div>

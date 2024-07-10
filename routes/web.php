@@ -56,89 +56,78 @@ Route::get('/hgigi', function () {
     return view('landingpage.harga.hgigi');
 });
 
-Route::get('/index', function () {
+/*Route::get('/index', function () {
     return view('admin.dashboard.index');
+});*/
+
+Route::get('/access-denied', function () {
+    return view('admin.access_denied2');
 });
-
-Route::get('/produk', function () {
-    return view('admin.produk.index');
-});
-
-Route::get('/bayar', function () {
-    return view('admin.metodebayar.index');
-});
-
-Route::get('/pemesanan', function () {
-    return view('admin.pemesanan.index');
-});
-
-
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('home', HomeController::class);
 
-
-// Users
-Route::resource('kelolausers', UserController::class);
-Route::get('/kelolausers', [UserController::class, 'index'])->name('kelolausers.index');
-Route::post('/kelolausers/store', [UserController::class, 'store'])->name('kelolausers.store');
-// End Users
-
-// Chatbot
-Route::resource('setchatbot', SetchatbotController::class);
-Route::get('/setchatbot', [SetchatbotController::class, 'index'])->name('setchatbot.index');
-// End Chatbot
+Route::middleware(['auth', 'checkrole:admin,support'])->group(function () {
+    // Chatbot
+    Route::resource('setchatbot', SetchatbotController::class);
+    Route::get('/setchatbot', [SetchatbotController::class, 'index'])->name('setchatbot.index');
+    // End Chatbot
+});
 
 
-// Metodebayar
-Route::resource('metodebayar', MetodebayarController::class);
-Route::get('/metodebayar', [MetodebayarController::class, 'index'])->name('metodebayar.index');
-// End Metodebayar
+Route::middleware(['auth', 'checkrole:admin'])->group(function () {
+    // Users
+    Route::resource('kelolausers', UserController::class);
+    Route::get('/kelolausers', [UserController::class, 'index'])->name('kelolausers.index');
+    Route::post('/kelolausers/store', [UserController::class, 'store'])->name('kelolausers.store');
+    // End Users
 
-// Produkjasa
-Route::resource('produkjasa', ProdukjasaController::class);
-Route::get('/produkjasa', [ProdukjasaController::class, 'index'])->name('produkjasa.index');
-// End Produkjasa
+    // Metodebayar
+    Route::resource('metodebayar', MetodebayarController::class);
+    Route::get('/metodebayar', [MetodebayarController::class, 'index'])->name('metodebayar.index');
+    // End Metodebayar
 
-// Pesanan
-Route::resource('pesanan', PesananController::class);
-Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan.index');
-Route::get('/history', [PesananController::class, 'index2'])->name('pesanan.index2');
-// End Pesanan
+    // Produkjasa
+    Route::resource('produkjasa', ProdukjasaController::class);
+    Route::get('/produkjasa', [ProdukjasaController::class, 'index'])->name('produkjasa.index');
+    // End Produkjasa
+});
 
-// Pesanan User
-Route::resource('order', PesananuserController::class);
-Route::get('/order', [PesananuserController::class, 'create'])->name('order.create');
-// End Pesanan User
+Route::middleware(['auth', 'checkrole:admin,finance'])->group(function () {
+    // Pesanan
+    Route::resource('pesanan', PesananController::class);
+    Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan.index');
+    Route::get('/history', [PesananController::class, 'index2'])->name('pesanan.index2');
+    // End Pesanan
+});
+
+
 
 /*Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware('auth');*/
 
 // Dashboard
-Route::resource('dashboard', DashboardController::class);
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::middleware(['auth'])->group(function () {
+    Route::resource('dashboard', DashboardController::class);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 // End Dashboard
 
 // Profile
-Route::resource('profile', ProfileController::class);
-Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('profile.index');
-Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
+    Route::resource('profile', ProfileController::class);
+    Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('profile.index');
+    Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
+});
 // End Profile
 
+// Pesanan User
+Route::resource('order', PesananuserController::class);
+Route::get('/order', [PesananuserController::class, 'create'])->name('order.create');
 Route::get('/pesanans/{id}/konfirmasi', [PesananuserController::class, 'confirmPayment'])->name('pesanan.konfirmasi');
 Route::post('/pesanans/{id}/konfirmasi', [PesananuserController::class, 'updatePayment']);
+// End Pesanan User
 
 
 Route::post('/chatbot/response', [ChatbotController::class, 'getResponse'])->name('chatbot.response');
-
-
-
-
-
-
-
-
-

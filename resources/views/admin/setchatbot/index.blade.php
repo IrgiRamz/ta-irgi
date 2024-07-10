@@ -33,7 +33,7 @@
                         @foreach($ar_tanya as $datax)
                         <tr>
                             <td>{{ $no }}</td>
-                            <td>{{ $datax->pertanyaan }}</td>
+                            <td>{{ $datax->pertanyaan2 }}</td>
                             <td>{{ $datax->jawaban }}</td>
                             @if($datax->status == 'aktif')
                             <td><span style="color: green;">Aktif</span></td>

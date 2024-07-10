@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Pertanyaan;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Sastrawi\Stemmer\StemmerFactory;
+
 
 class SetchatbotController extends Controller
 {
@@ -28,6 +30,31 @@ class SetchatbotController extends Controller
         return view('admin.setchatbot.create');
     }
 
+    private function preprocessText($text)
+    {
+        // Case Folding
+        $text = strtolower($text);
+
+        // Cleaning (Remove unwanted characters)
+        $text = preg_replace('/[^a-z0-9\s]/', '', $text);
+
+        // Tokenizing (Split text into words)
+        $words = explode(' ', $text);
+
+        // Normalization and Filtering (Remove stopwords, normalize words, etc.)
+        $words = array_filter($words, function ($word) {
+            // Add your stopword removal and normalization logic here
+            return strlen($word) > 2; // Example: remove words with less than 3 characters
+        });
+
+        // Stemming
+        $stemmerFactory = new StemmerFactory();
+        $stemmer = $stemmerFactory->createStemmer();
+        $words = array_map([$stemmer, 'stem'], $words);
+
+        return implode(' ', $words);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -38,8 +65,14 @@ class SetchatbotController extends Controller
             'jawaban' => ['required', 'string'],
         ]);
 
+        $question = $request->pertanyaan;
+
+        $processedQuestion = $this->preprocessText($question);
+
+
         Pertanyaan::create([
-            'pertanyaan' => $request['pertanyaan'],
+            'pertanyaan' => $processedQuestion,
+            'pertanyaan2' => $request['pertanyaan'],
             'jawaban' => $request['jawaban'],
             'status' => $request['status'],
             'iduser' => $request['pembuat'],
@@ -75,8 +108,11 @@ class SetchatbotController extends Controller
             'pertanyaan' => ['required', 'string'],
             'jawaban' => ['required', 'string'],
         ]);
-        
-        $chatbot->pertanyaan = $request->pertanyaan;
+
+        $processedQuestion = $this->preprocessText($request->pertanyaan);
+
+        $chatbot->pertanyaan = $processedQuestion;
+        $chatbot->pertanyaan2 = $request->pertanyaan;
         $chatbot->jawaban = $request->jawaban;
         $chatbot->status = $request->status;
 
