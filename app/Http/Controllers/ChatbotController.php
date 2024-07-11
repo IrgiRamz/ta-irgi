@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Sastrawi\Stemmer\StemmerFactory;
 use App\Models\Pertanyaan;
+use voku\helper\StopWords;
+
 
 
 class ChatbotController extends Controller
@@ -45,9 +47,18 @@ class ChatbotController extends Controller
         $words = explode(' ', $text);
 
         // Normalization and Filtering (Remove stopwords, normalize words, etc.)
-        $words = array_filter($words, function ($word) {
+        /*$words = array_filter($words, function ($word) {
             // Add your stopword removal and normalization logic here
             return strlen($word) > 2; // Example: remove words with less than 3 characters
+        });*/
+
+         // Get Indonesian stopwords
+         $stopWords = new StopWords();
+         $stopwords = $stopWords->getStopWordsFromLanguage('id');
+
+        // Normalization and Filtering (Remove stopwords, normalize words, etc.)
+        $words = array_filter($words, function ($word) use ($stopwords) {
+            return strlen($word) > 2 && !in_array($word, $stopwords);
         });
 
         // Stemming
