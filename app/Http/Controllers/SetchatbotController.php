@@ -36,7 +36,7 @@ class SetchatbotController extends Controller
         $text = strtolower($text);
 
         // Cleaning (Remove unwanted characters)
-        $text = preg_replace('/[^a-z0-9\s]/', '', $text);
+        $text = preg_replace('/[^a-z\s]/', '', $text);
 
         // Tokenizing (Split text into words)
         $words = explode(' ', $text);
