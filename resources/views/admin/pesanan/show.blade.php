@@ -82,7 +82,11 @@
                 <hr>
                 <div class="mb-3">
                     <h5>Diverifikasi oleh:</h5>
+                    @if($row->user)
                     <p>{{ $row->user->name }}</p>
+                    @else
+                    <p style="color: red;">User telah dihapus</p>
+                    @endif
                 </div>
                 @endif
 

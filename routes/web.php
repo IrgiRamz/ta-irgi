@@ -127,6 +127,11 @@ Route::resource('order', PesananuserController::class);
 Route::get('/order', [PesananuserController::class, 'create'])->name('order.create');
 Route::get('/pesanans/{id}/konfirmasi', [PesananuserController::class, 'confirmPayment'])->name('pesanan.konfirmasi');
 Route::post('/pesanans/{id}/konfirmasi', [PesananuserController::class, 'updatePayment']);
+
+Route::get('/cekpembayaran', [PesananuserController::class, 'index'])->name('cek.pembayaran');
+Route::post('/pesanans/cekpemesanan', [PesananuserController::class, 'cekpemesanan'])->name('cek.pemesanan');
+
+
 // End Pesanan User
 
 

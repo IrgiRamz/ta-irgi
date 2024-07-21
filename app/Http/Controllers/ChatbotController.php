@@ -46,12 +46,6 @@ class ChatbotController extends Controller
         // Tokenizing (Split text into words)
         $words = explode(' ', $text);
 
-        // Normalization and Filtering (Remove stopwords, normalize words, etc.)
-        /*$words = array_filter($words, function ($word) {
-            // Add your stopword removal and normalization logic here
-            return strlen($word) > 2; // Example: remove words with less than 3 characters
-        });*/
-
          // Get Indonesian stopwords
          $stopWords = new StopWords();
          $stopwords = $stopWords->getStopWordsFromLanguage('id');

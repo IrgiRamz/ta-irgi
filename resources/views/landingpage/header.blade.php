@@ -42,6 +42,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/kontak')}}">Kontak</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/cekpembayaran')}}">Cek Pemesanan</a>
+                    </li>
                     <!--<li class="nav-item d-none d-lg-none d-md-block d-sm-block">
             <a href="https://api.whatsapp.com/send?phone=628118248989&text=Halo Kak, saya tertarik dengan software klinik" class="btn bg-white d-none d-lg-block" type="submit">Hubungi Kami</a>
           </li>-->

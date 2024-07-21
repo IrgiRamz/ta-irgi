@@ -18,6 +18,7 @@ class PesananuserController extends Controller
      */
     public function index()
     {
+        return view('landingpage.cekpembayaran.index');
     }
 
     /**
@@ -127,6 +128,13 @@ class PesananuserController extends Controller
 
         return redirect()->route('pesanan.konfirmasi', $pesanan->idpesanan)->with('success', 'Pesanan berhasil. Silakan konfirmasi pembayaran.');
         return redirect()->route('pesanan.konfirmasi', $pesanan->idpesanan)->with('success', 'Konfirmasi pembayaran berhasil, Tunggu Konfirmasi Via Whatsapp');
+    }
+    
+    public function cekpemesanan(Request $request)
+    {
+        $invoice = $request->kodeinvoice;
+        $pesanan = Pesanan::where('invoice', $invoice)->firstOrFail();
+        return redirect()->route('pesanan.konfirmasi', $pesanan->idpesanan);
     }
 
     /**

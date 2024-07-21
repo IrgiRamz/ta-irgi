@@ -40,7 +40,11 @@
                             @else
                             <td><span style="color: red;">Nonaktif</span></td>
                             @endif
+                            @if($datax->user)
                             <td>{{ $datax->user->name }}</td>
+                            @else
+                            <td><span style="color: red;">Pembuat telah dihapus</span></td>
+                            @endif
                             <td class="text-center">
                                 <form method="POST" action="{{ route('setchatbot.destroy', $datax->idpertanyaan) }}" class="delete-form">
                                     @csrf

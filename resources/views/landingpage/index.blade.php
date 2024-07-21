@@ -41,7 +41,7 @@
 
     <link rel="shortcut icon" href="{{ asset('images/landingpage/favicon.ico') }}" />
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1D31KKQ703"></script>
+    {{--<script async src="https://www.googletagmanager.com/gtag/js?id=G-1D31KKQ703"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -51,7 +51,7 @@
         gtag('js', new Date());
 
         gtag('config', 'G-1D31KKQ703');
-    </script>
+    </script> --}}
     <style>
         .chatbot-container {
             display: none;

@@ -48,7 +48,11 @@
                                 @endphp
                                 Rp.{{ number_format($totalHarga, 0, ',', '.') }}
                             </td>
+                            @if($datax->user)
                             <td>{{ $datax->user->name }}</td>
+                            @else
+                            <td><span style="color: red;">User telah dihapus</span></td>
+                            @endif
                             <td class="text-center">
                                 <form method="POST" action="{{ route('pesanan.destroy', $datax->idpesanan) }}" class="delete-form">
                                     @csrf

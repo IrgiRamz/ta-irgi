@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -16,7 +17,8 @@ class UserController extends Controller
     public function index()
     {
         //$ar_users = DB::table('users')->where('status', '=', 'aktif'); 
-        $ar_users = User::all();
+        //$ar_users = User::all();
+        $ar_users = User::where('kodeuser', '!=', Auth::user()->kodeuser)->get();
         return view('admin.user.index', compact('ar_users'));
     }
 

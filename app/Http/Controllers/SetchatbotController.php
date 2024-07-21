@@ -34,31 +34,25 @@ class SetchatbotController extends Controller
 
     private function preprocessText($text)
     {
-        // Case Folding
+        // Case Folding (Membuat teks menjadi huruf kecil)
         $text = strtolower($text);
 
-        // Cleaning (Remove unwanted characters)
+        // Cleaning (Menghapus karakter yang tak diperlukan seperti angka dan simbol)
         $text = preg_replace('/[^a-z\s]/', '', $text);
 
-        // Tokenizing (Split text into words)
+        // Tokenizing (Membuat teks menjadi beberapa potongan)
         $words = explode(' ', $text);
-
-        // Normalization and Filtering (Remove stopwords, normalize words, etc.)
-        /*$words = array_filter($words, function ($word) {
-            // Add your stopword removal and normalization logic here
-            return strlen($word) > 2; // Example: remove words with less than 3 characters
-        });*/
 
         // Get Indonesian stopwords
         $stopWords = new StopWords();
         $stopwords = $stopWords->getStopWordsFromLanguage('id');
 
-        // Normalization and Filtering (Remove stopwords, normalize words, etc.)
+        //Filtering (Stopword Removal)
         $words = array_filter($words, function ($word) use ($stopwords) {
             return strlen($word) > 2 && !in_array($word, $stopwords);
         });
 
-        // Stemming
+        // Normalization Stemming
         $stemmerFactory = new StemmerFactory();
         $stemmer = $stemmerFactory->createStemmer();
         $words = array_map([$stemmer, 'stem'], $words);

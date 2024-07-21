@@ -27,7 +27,7 @@
                     @method('PUT')
                     <div class="mb-3">
                         <label for="pertanyaan" class="form-label">Pertanyaan</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="pertanyaan" id="pertanyaan" required>{{ $row->pertanyaan }}</textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="pertanyaan" id="pertanyaan" required>{{ $row->pertanyaan2 }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="jawaban" class="form-label">Jawaban</label>

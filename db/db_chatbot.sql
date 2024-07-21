@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Jul 2024 pada 02.04
+-- Waktu pembuatan: 21 Jul 2024 pada 20.07
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -149,7 +149,10 @@ INSERT INTO `pertanyaan` (`idpertanyaan`, `pertanyaan`, `pertanyaan2`, `jawaban`
 (1, 'apa itu iconix', 'apa itu iconix', 'Iconix Adalah sebuah perusahaan yang bergerak di bidang penyedia jasa klinik kecantikan, kesehatan dan gigi.', 'aktif', 1),
 (2, 'apa itu paket kedua', 'apa itu paket kedua', 'paket adalah sebuah fitur untuk membeli sebuah treatment banyak dalam 1 kali beli.', 'aktif', 1),
 (7, 'harga klinik kecantikan premium', 'harga klinik kecantikan premium', 'Harga Klinik Kecantikan Premium adalah Rp.575.000', 'aktif', 1),
-(8, 'berapa harga software aplikasi sehat pratama', 'berapakah harga software aplikasi kesehatan pratama', 'Harga klinik software kesehatan pratama untuk 1 bulannya adalah Rp. 375.000 dan untuk 1 tahun Rp.3.750.000', 'aktif', 1);
+(8, 'berapa harga software aplikasi sehat pratama', 'berapakah harga software aplikasi kesehatan pratama', 'Harga klinik software kesehatan pratama untuk 1 bulannya adalah Rp. 375.000 dan untuk 1 tahun Rp.3.750.000', 'aktif', 1),
+(9, 'maksud data transaksi', 'apa yang dimaksud dengan data transaksi', 'data transaksi adalah', 'aktif', 1),
+(10, 'sih sebut sigma', 'apa sih yang disebut sigma', 'sigma adalah aku', 'aktif', NULL),
+(11, 'tahu wing', 'apa yang kamu ketahui tentang mewing', 'mewing adalah sigma lite', 'aktif', NULL);
 
 -- --------------------------------------------------------
 
@@ -193,11 +196,12 @@ INSERT INTO `pesanan` (`idpesanan`, `invoice`, `namapemesan`, `emailpemesan`, `n
 (15, 'INV-240708003', 'Tio', 'tio@gmail.com', '4242424', 'Klinik Kecantikan Hebat', '1', 375000, 'Perumahan Grand Kahuripan Cluster Merapi no:IA38 Kec.Klapanunggal', 'ramatarax.clinics.id', '2024-07-08 01:42:23', NULL, NULL, 'belum', 13, NULL, 1),
 (16, 'INV-240708004', 'Tio', 'tio@gmail.com', '4242424', 'Klinik Kecantikan Hebat', '1', 375000, 'Perumahan Grand Kahuripan Cluster Merapi no:IA38 Kec.Klapanunggal', 'ramatarax.clinics.id', '2024-07-08 01:42:40', NULL, NULL, 'belum', 13, NULL, 1),
 (17, 'INV-240708005', 'lala', 'lala@gmail.com', '089472874287', 'Lala kliniks', '12', 5750000, 'Perumahan Grand Kahuripan Cluster Merapi no:IA38 Kec.Klapanunggal', '0888938298329.clinic.co.id', '2024-07-08 09:27:53', 'uploads/EtJPju4SW6tch6NGhhDSNZfti8N5sqD0fBafxtsV.png', 'sudah bayar', 'sudah', 14, NULL, 3),
-(18, 'INV-240708006', 'lala2', 'lala@gmail.com', '0840289428942', 'Lala kliniks', '1', 375000, 'Perumahan Grand Kahuripan Cluster Merapi no:IA38 Kec.Klapanunggal', 'ramatara.clinic.co.id', '2024-07-08 09:43:31', 'assets/bukti/sTZ3w15a2CsnC7zrF30taOoxPvQaAVN0p8B2JxyL.png', 'sudah bayar', 'sudah', 13, NULL, 3),
+(18, 'INV-240708006', 'lala2', 'lala@gmail.com', '0840289428942', 'Lala kliniks', '1', 375000, 'Perumahan Grand Kahuripan Cluster Merapi no:IA38 Kec.Klapanunggal', 'ramatara.clinic.co.id', '2024-07-08 09:43:31', 'assets/bukti/sTZ3w15a2CsnC7zrF30taOoxPvQaAVN0p8B2JxyL.png', 'sudah bayar', 'verif', 13, NULL, 3),
 (19, 'INV-240708007', 'Nail', 'rama2@gmail.com', '432434334', 'Beauty Klinik', '6', 3450000, 'Perumahan Grand Kahuripan Cluster Merapi no:IA38 Kec.Klapanunggal', 'klinikss.beautyclinic.app', '2024-07-08 09:50:17', 'assets/bukti/1720407035_29e522e01dbcedeaf93a820681f653df.png', 'sudah bayar', 'sudah', 14, NULL, 1),
 (20, 'INV-240708008', 'Nail3', 'rama2@gmail.com', '432434334', 'Beauty Klinik', '6', 3450000, 'Perumahan Grand Kahuripan Cluster Merapi no:IA38 Kec.Klapanunggal', 'klinikss.beautyclinic.app', '2024-07-08 09:57:05', 'assets/bukti/1720407437_83790f2b43f00be.png', 'sudah', 'sudah', 14, NULL, 1),
 (21, 'INV-240708009', 'Rama ganteng', 'tio@gmail.com', '2432421412412', 'Klinik Nailal 2', '1', 375000, 'Perumahan Grand Kahuripan Cluster Merapi no:IA38 Kec.Klapanunggal', 'ramataro.clinic.co.id', '2024-07-08 10:03:33', 'assets/bukti/1720407832_20055311_1 (1).jpg', 'sudah bayar yaa mass', 'verif', 13, 1, 3),
-(22, 'INV-240710001', 'Nail', 'nail1234@gmail.com', '04298429824', 'Klinik Nailal 2', '1', 375000, 'Perumahan Grand Kahuripan Cluster Merapi no:IA38 Kec.Klapanunggal', 'nailal.clinics.id', '2024-07-10 05:56:12', 'assets/bukti/1720565786_83790f2b43f00be.png', 'sudah', 'sudah', 13, NULL, 1);
+(22, 'INV-240710001', 'Nail', 'nail1234@gmail.com', '04298429824', 'Klinik Nailal 2', '1', 375000, 'Perumahan Grand Kahuripan Cluster Merapi no:IA38 Kec.Klapanunggal', 'nailal.clinics.id', '2024-07-10 05:56:12', 'assets/bukti/1720565786_83790f2b43f00be.png', 'sudah', 'sudah', 13, NULL, 1),
+(23, 'INV-240721001', 'Rama', 'ram2a@gmail.com', '4243243232', 'Klinik Nailal', '1', 375000, 'Perumahan Grand Kahuripan Cluster Merapi no:IA38 Kec.Klapanunggal', 'ramatarax.clinics.id', '2024-07-21 11:14:30', NULL, NULL, 'belum', 13, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -363,13 +367,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT untuk tabel `pertanyaan`
 --
 ALTER TABLE `pertanyaan`
-  MODIFY `idpertanyaan` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idpertanyaan` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `idpesanan` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `idpesanan` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT untuk tabel `produkjasa`
@@ -381,7 +385,7 @@ ALTER TABLE `produkjasa`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -391,7 +395,7 @@ ALTER TABLE `users`
 -- Ketidakleluasaan untuk tabel `pertanyaan`
 --
 ALTER TABLE `pertanyaan`
-  ADD CONSTRAINT `fk_pertanyaan_user1` FOREIGN KEY (`iduser`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_pertanyaan_user1` FOREIGN KEY (`iduser`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION;
 
 --
 -- Ketidakleluasaan untuk tabel `pesanan`
@@ -399,7 +403,7 @@ ALTER TABLE `pertanyaan`
 ALTER TABLE `pesanan`
   ADD CONSTRAINT `fk_pesanan_metodebayar1` FOREIGN KEY (`idbayar`) REFERENCES `metodebayar` (`idbayar`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_pesanan_produkjasa` FOREIGN KEY (`idproduk`) REFERENCES `produkjasa` (`idproduk`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_pesanan_user1` FOREIGN KEY (`iduser`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_pesanan_user1` FOREIGN KEY (`iduser`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
